@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Movies</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <h1>Movies List</h1>
+  <a href="/movies/add">➕ Add Movie</a>
+  <table border="1">
+    <tr><th>Title</th><th>Year</th><th>Rating</th><th>Actions</th></tr>
+    <% movies.forEach(movie => { %>
+      <tr>
+        <td><%= movie.title %></td>
+        <td><%= movie.year %></td>
+        <td><%= movie.rating %></td>
+        <td>
+          <a href="/movies/edit/<%= movie._id %>">Edit</a>
+          <form method="POST" action="/movies/<%= movie._id %>?_method=DELETE" style="display:inline;">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </table>
+</body>
+</html>
