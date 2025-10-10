@@ -36,53 +36,83 @@ export default function AddProduct({ onAddSuccess }) {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="bg-white shadow-md p-4 rounded-lg max-w-md mx-auto"
-    >
-      <h2 className="text-lg font-semibold mb-3">Add New Product</h2>
+    <div className="container mt-5">
+      <div className="card shadow-lg border-0 rounded-4 p-4 mx-auto" style={{ maxWidth: "500px" }}>
+        <h4 className="text-center mb-4 fw-bold text-success">Add New Product</h4>
 
-      <input
-        name="name"
-        placeholder="Product Name"
-        value={form.name}
-        onChange={handleChange}
-        className="w-full border p-2 mb-2 rounded"
-        required
-      />
-      <input
-        name="price"
-        placeholder="Price"
-        type="number"
-        value={form.price}
-        onChange={handleChange}
-        className="w-full border p-2 mb-2 rounded"
-        required
-      />
-      <textarea
-        name="description"
-        placeholder="Description"
-        value={form.description}
-        onChange={handleChange}
-        className="w-full border p-2 mb-2 rounded"
-      ></textarea>
+        <form onSubmit={handleSubmit}>
+          {/* Product Name */}
+          <div className="mb-3">
+            <label className="form-label fw-semibold">Product Name</label>
+            <input
+              name="name"
+              type="text"
+              placeholder="Enter product name"
+              value={form.name}
+              onChange={handleChange}
+              className="form-control rounded-3 shadow-sm"
+              required
+            />
+          </div>
 
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleFile}
-        className="w-full mb-2"
-      />
-      {preview && (
-        <img src={preview} alt="Preview" className="w-32 h-32 object-cover mb-2 rounded" />
-      )}
+          {/* Price */}
+          <div className="mb-3">
+            <label className="form-label fw-semibold">Price (₹)</label>
+            <input
+              name="price"
+              type="number"
+              placeholder="Enter price"
+              value={form.price}
+              onChange={handleChange}
+              className="form-control rounded-3 shadow-sm"
+              required
+            />
+          </div>
 
-      <button
-        type="submit"
-        className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-      >
-        Add Product
-      </button>
-    </form>
+          {/* Description */}
+          <div className="mb-3">
+            <label className="form-label fw-semibold">Description</label>
+            <textarea
+              name="description"
+              placeholder="Write product details..."
+              value={form.description}
+              onChange={handleChange}
+              className="form-control rounded-3 shadow-sm"
+              rows="3"
+            ></textarea>
+          </div>
+
+          {/* Image Upload */}
+          <div className="mb-3">
+            <label className="form-label fw-semibold">Product Image</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFile}
+              className="form-control rounded-3 shadow-sm"
+            />
+          </div>
+
+          {/* Preview */}
+          {preview && (
+            <div className="text-center mb-3">
+              <img
+                src={preview}
+                alt="Preview"
+                className="img-thumbnail shadow-sm rounded-3"
+                style={{ width: "150px", height: "150px", objectFit: "cover" }}
+              />
+            </div>
+          )}
+
+          {/* Submit Button */}
+          <div className="d-grid">
+            <button type="submit" className="btn btn-success rounded-3 fw-semibold shadow-sm">
+              ➕ Add Product
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 }

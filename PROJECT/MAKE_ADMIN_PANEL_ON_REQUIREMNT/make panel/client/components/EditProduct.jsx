@@ -32,43 +32,96 @@ export default function EditProduct({ product, onClose, onUpdateSuccess }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-      <form className="bg-white p-6 rounded-lg shadow-md w-96" onSubmit={handleSubmit}>
-        <h3 className="text-lg font-semibold mb-3">Edit Product</h3>
-        <input
-          name="name"
-          value={form.name}
-          onChange={handleChange}
-          className="w-full border p-2 mb-2 rounded"
-        />
-        <input
-          name="price"
-          type="number"
-          value={form.price}
-          onChange={handleChange}
-          className="w-full border p-2 mb-2 rounded"
-        />
-        <textarea
-          name="description"
-          value={form.description}
-          onChange={handleChange}
-          className="w-full border p-2 mb-2 rounded"
-        />
-        <input type="file" onChange={handleFile} className="w-full mb-2" />
-        {preview && <img src={preview} className="w-24 h-24 object-cover rounded mb-2" />}
-        <div className="flex justify-end gap-2">
-          <button
-            type="button"
-            onClick={onClose}
-            className="px-4 py-2 bg-gray-400 text-white rounded"
-          >
-            Cancel
-          </button>
-          <button type="submit" className="px-4 py-2 bg-green-600 text-white rounded">
-            Update
-          </button>
+    <div
+      className="modal show d-block"
+      tabIndex="-1"
+      style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+    >
+      <div className="modal-dialog modal-dialog-centered">
+        <div className="modal-content rounded-4 shadow-lg">
+          <div className="modal-header">
+            <h5 className="modal-title text-success fw-bold">Edit Product</h5>
+            <button type="button" className="btn-close" onClick={onClose}></button>
+          </div>
+          <div className="modal-body">
+            <form onSubmit={handleSubmit}>
+              {/* Name */}
+              <div className="mb-3">
+                <label className="form-label fw-semibold">Product Name</label>
+                <input
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
+                  className="form-control rounded-3 shadow-sm"
+                  required
+                />
+              </div>
+
+              {/* Price */}
+              <div className="mb-3">
+                <label className="form-label fw-semibold">Price (₹)</label>
+                <input
+                  name="price"
+                  type="number"
+                  value={form.price}
+                  onChange={handleChange}
+                  className="form-control rounded-3 shadow-sm"
+                  required
+                />
+              </div>
+
+              {/* Description */}
+              <div className="mb-3">
+                <label className="form-label fw-semibold">Description</label>
+                <textarea
+                  name="description"
+                  value={form.description}
+                  onChange={handleChange}
+                  className="form-control rounded-3 shadow-sm"
+                  rows="3"
+                ></textarea>
+              </div>
+
+              {/* Image Upload */}
+              <div className="mb-3">
+                <label className="form-label fw-semibold">Product Image</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFile}
+                  className="form-control rounded-3 shadow-sm"
+                />
+              </div>
+
+              {/* Preview */}
+              {preview && (
+                <div className="text-center mb-3">
+                  <img
+                    src={preview}
+                    alt="Preview"
+                    className="img-thumbnail rounded-3 shadow-sm"
+                    style={{ width: "120px", height: "120px", objectFit: "cover" }}
+                  />
+                </div>
+              )}
+
+              {/* Buttons */}
+              <div className="d-flex justify-content-end gap-2">
+                <button
+                  type="button"
+                  className="btn btn-secondary rounded-3 "
+                  onClick={onClose}
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="btn btn-success rounded-3">
+                  Update
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 }

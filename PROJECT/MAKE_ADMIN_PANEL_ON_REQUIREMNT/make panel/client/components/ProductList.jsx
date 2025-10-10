@@ -23,32 +23,39 @@ export default function ProductList() {
   }, []);
 
   return (
-    <div className="p-4">
-      <h2 className="text-lg font-semibold mb-3">Product List</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    <div className="container mt-5">
+      <h2 className="mb-4 fw-bold text-center">Product List</h2>
+
+      <div className="row g-4">
         {products.map((product) => (
-          <div key={product._id} className="border p-3 rounded-lg bg-white shadow-sm">
-            <img
-              src={`http://localhost:5000/uploads/${product.image}`}
-              alt={product.name}
-              className="w-full h-40 object-cover rounded mb-2"
-            />
-            <h3 className="font-semibold">{product.name}</h3>
-            <p>₹{product.price}</p>
-            <p className="text-sm text-gray-600">{product.description}</p>
-            <div className="flex justify-between mt-2">
-              <button
-                onClick={() => setEditingProduct(product)}
-                className="bg-blue-500 text-white px-3 py-1 rounded"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => handleDelete(product._id)}
-                className="bg-red-500 text-white px-3 py-1 rounded"
-              >
-                Delete
-              </button>
+          <div key={product._id} className="col-12 col-sm-6 col-md-4">
+            <div className="card h-100 shadow-sm border-0 rounded-4">
+              <img
+                src={`http://localhost:5000/uploads/${product.image}`}
+                className="card-img-top rounded-top-4"
+                alt={product.name}
+                style={{ height: "200px", objectFit: "cover" }}
+              />
+              <div className="card-body d-flex flex-column">
+                <h5 className="card-title fw-semibold">{product.name}</h5>
+                <p className="card-text text-success fw-bold">₹{product.price}</p>
+                <p className="card-text text-muted small">{product.description}</p>
+
+                <div className="mt-auto d-flex justify-content-between">
+                  <button
+                    onClick={() => setEditingProduct(product)}
+                    className="btn btn-primary btn-sm rounded-3"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(product._id)}
+                    className="btn btn-danger btn-sm rounded-3"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         ))}
